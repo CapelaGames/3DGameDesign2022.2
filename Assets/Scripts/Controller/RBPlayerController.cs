@@ -19,6 +19,10 @@ public class RBPlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float rotationSpeed = 20f;
     [SerializeField] private Camera _camera;
+
+    //CHANGED
+    private Vector3 vertInput;
+    private Vector3 horiInput;
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -37,7 +41,8 @@ public class RBPlayerController : MonoBehaviour
     }
     void Update()
     {
-        input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        vertInput = new Vector3(0, 0, Input.GetAxis("Vertical"));
+        horiInput = new Vector3(Input.GetAxis("Horizontal"),0,0);
 
         if (Input.GetButtonDown("Jump") && _isGrounded)
         {
@@ -45,9 +50,13 @@ public class RBPlayerController : MonoBehaviour
                 ,ForceMode.VelocityChange);
         }
 
-        //transforms input to be relative to the camera
-        input = Camera.main.transform.TransformDirection(input);
+        //CHANGED
+        //transforms input to be relative to the PLAYER
+        vertInput = _camera.transform.TransformDirection(vertInput);
+        horiInput = transform.TransformDirection(horiInput);
+        input = vertInput + horiInput;
         input.y = 0f;
+        input.Normalize();
     }
     private void FixedUpdate()
     {
@@ -58,12 +67,14 @@ public class RBPlayerController : MonoBehaviour
         //ternary operator -------     Condition? true: false
         _rigidbody.MovePosition(_rigidbody.position + input.normalized * (speed * Time.deltaTime));
         //Quaternion.identity means no rotation
-        if (input != Vector3.zero)
-        {
-            Quaternion toRotation = Quaternion.LookRotation(input, Vector3.up);
+        //if (vertInput != Vector3.zero)
+      //  {
+            //CHANGED
+            Vector3 flattenedInput = Vector3.ProjectOnPlane(_camera.transform.forward, Vector3.up);
+            Quaternion toRotation = Quaternion.LookRotation(flattenedInput, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 
                 rotationSpeed * Time.deltaTime);
-        }
+     //   }
 
     }
 

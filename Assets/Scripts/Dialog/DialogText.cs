@@ -7,23 +7,19 @@ using UnityEngine;
 public class DialogText : ScriptableObject
 {
     private int currentPageNumber = 0;
-    
     [TextArea(3,10)]
     public List<string> conversationText;
-
-
+    
     public string CurrentPage()
     {
         return conversationText[currentPageNumber];
     }
-
     public string TurnToNextPage()
     {
         currentPageNumber++;
         currentPageNumber = Mathf.Min(currentPageNumber, conversationText.Count - 1);
         return CurrentPage();
     }
-    
     public string TurnToPrevPage()
     {
         currentPageNumber--;

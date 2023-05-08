@@ -2012,13 +2012,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _focus: {fileID: 8264987674027923511}
-  _focusOffset: {x: 0, y: 2, z: 0}
+  _focusOffset: {x: 0, y: 0, z: 0}
   _focusRadius: 1
   _focusCentering: 0.5
   _rotationSpeed: 90
   _orbitDistance: 5
-  _minVertAngle: -10
-  _maxVertAngle: 70
+  _minVertAngle: -30
+  _maxVertAngle: 60
   alignDelay: 2
 --- !u!1 &998846993
 GameObject:
@@ -5354,7 +5354,6 @@ GameObject:
   - component: {fileID: 8264987674027923509}
   - component: {fileID: 8264987674027923508}
   - component: {fileID: 8264987674027923504}
-  - component: {fileID: 8264987674027923505}
   - component: {fileID: 8264987674027923512}
   m_Layer: 7
   m_Name: Player (1)
@@ -5379,25 +5378,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &8264987674027923505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8264987674027923467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca4785dfe3a65b149ab1af5eb4e0eee3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  jumpHeight: 2
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 65
-  rotationSpeed: 400
-  _camera: {fileID: 963194227}
 --- !u!136 &8264987674027923508
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5487,12 +5467,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 8264987674027923467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710d89ab43d771ce196884dd4f16043b, type: 3}
+  m_Script: {fileID: 11500000, guid: ca4785dfe3a65b149ab1af5eb4e0eee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 963194227}
-  player: {fileID: 0}
-  maxClickDistance: 4
+  speed: 5
+  jumpHeight: 2
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  rotationSpeed: 1000
+  _camera: {fileID: 963194227}
 --- !u!1 &8264987674290258824
 GameObject:
   m_ObjectHideFlags: 0
